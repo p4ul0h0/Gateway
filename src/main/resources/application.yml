@@ -1,0 +1,17 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_ADDRESS}
+      
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: UserMicroservice
+        uri: lb://KUBERNETESTESTAPP
+        predicates:
+          - Path=/testapp/**
+        filters:
+          - StripPrefix=1
